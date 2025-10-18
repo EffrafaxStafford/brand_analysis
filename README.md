@@ -50,7 +50,7 @@ python main.py \
 python main.py --files csv_data/products1.csv csv_data/products2.csv
 ```
 
-Содержимое отчета:
+Содержимое отчета `average-rating`:
 
 ```
 brand,rating
@@ -78,10 +78,13 @@ xiaomi,4.37
 
 
 ```bash
-python main.py --files csv_data/products1.csv csv_data/products2.csv --columns brand price
+python main.py \
+    --files csv_data/products1.csv csv_data/products2.csv \
+    --report average-price \
+    --columns brand price
 ```
 
-Содержимое отчета:
+Содержимое отчета `average-price`:
 ```
 brand,price
 samsung,849.0
@@ -101,6 +104,38 @@ xiaomi,215.67
 +----+---------+---------+
 |  3 | xiaomi  |  215.67 |
 +----+---------+---------+
+```
+
+**3. Генерация отчета о наименовании моделей по брендам из двух файлов.**
+
+
+```bash
+python main.py \
+    --files csv_data/products1.csv csv_data/products2.csv \
+    --report brand-analysis \
+    --columns brand name
+```
+
+Содержимое отчета `brand-analysis`:
+```
+name,brand
+poco x5 pro / redmi 10c / redmi note 12,xiaomi
+galaxy z flip 5 / galaxy s23 ultra / galaxy a54,samsung
+iphone se / iphone 13 mini / iphone 15 pro / iphone 14,apple
+
+```
+
+Вывод в терминал:
+```bash
++----+--------------------------------------------------------+---------+
+|    | name                                                   | brand   |
++====+========================================================+=========+
+|  1 | poco x5 pro / redmi 10c / redmi note 12                | xiaomi  |
++----+--------------------------------------------------------+---------+
+|  2 | galaxy z flip 5 / galaxy s23 ultra / galaxy a54        | samsung |
++----+--------------------------------------------------------+---------+
+|  3 | iphone se / iphone 13 mini / iphone 15 pro / iphone 14 | apple   |
++----+--------------------------------------------------------+---------+
 ```
 
 ## Тестирование

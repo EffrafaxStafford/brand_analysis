@@ -60,7 +60,7 @@ def calc_avg_values(data: list[dict]) -> None:
 
 
 def sorted_data(data: list) -> None:
-    """Сортирукт данные по убыванию значений во втором столюце."""
+    """Сортирукт данные по убыванию значений во втором столбце."""
     data.sort(key=lambda x: list(x.values())[1], reverse=True)
 
 
