@@ -2,7 +2,7 @@ import csv
 from enum import Enum
 
 
-def reader(filenames: list) -> list:
+def read_csv_file(filenames: list) -> list:
     data = list()
     for filename in filenames:
         with open(filename, "r") as file:
@@ -10,11 +10,10 @@ def reader(filenames: list) -> list:
             for row in filedata:
                if row not in data:
                   data.append(row)
-    print(*data, sep='\n')
     return data
 
 
-def union_columns(data: list, col1='brand', col2='rating') -> list:
+def union_columns(data: list, col1: str = 'brand', col2: str = 'rating') -> list:
     union, column1 = list(), list()
     for row in data:
         sub_row = {k:v if k==col1 else [v] for k,v in row.items() if k in (col1, col2)}
@@ -26,13 +25,12 @@ def union_columns(data: list, col1='brand', col2='rating') -> list:
     return union
 
 
-# def get_brand_ratings(data: list) -> dict:
-#     brand_ratings = dict()
-#     for record in data:
-#        brand = record[Column.BRAND.value]
-#        rating = float(record[Column.RATING.value])
-#        brand_ratings[brand] = brand_ratings.get(brand, []) + [rating]
-#     return brand_ratings
+def write_csv_file(filename: str, data: list) -> None:
+    with open(filename, mode='w') as file:
+        fieldnames = list(data[0].keys())
+        csv_writer = csv.DictWriter(file, fieldnames=fieldnames)
+        csv_writer.writeheader()
+        csv_writer.writerows(data)
 
 
 # def get_avg_brand_ratings(brand_ratings: dict) -> dict:
