@@ -20,7 +20,7 @@ def union_columns(data: list, col1: str = 'brand', col2: str = 'rating') -> list
             column1.append(sub_row[col1])
             union.append(sub_row)
         else:
-            union[column1.index(sub_row[col1])][col2].extend(sub_row[col2])
+            union[column1.index(sub_row[col1])][col2] += sub_row[col2]
     return union
 
 
@@ -30,3 +30,14 @@ def write_csv_file(filename: str, data: list) -> None:
         csv_writer = csv.DictWriter(file, fieldnames=fieldnames)
         csv_writer.writeheader()
         csv_writer.writerows(data)
+
+
+def calc_avg_values(data: list) -> None:
+    for row in data:
+        for k, v in row.items():
+            if isinstance(v, list):
+                row[k] = round(mean(map(float, v)), 2)
+
+
+def sorted_data(data: list) -> None:
+    data.sort(key=lambda x: list(x.values())[1], reverse=True)
