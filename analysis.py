@@ -5,11 +5,15 @@ from statistics import mean
 
 def read_csv_file(filenames: list) -> list:
     data = list()
-    for filename in set(filenames):
-        with open(filename, "r") as file:
-            filedata = csv.DictReader(file)
-            for row in filedata:
-                data.append(row)
+    if filenames is not None:
+        for filename in set(filenames):
+            try:
+                with open(filename, "r") as file:
+                    filedata = csv.DictReader(file)
+                    for row in filedata:
+                        data.append(row)
+            except FileNotFoundError:
+                print(f'Файл {filename} не найден')
     return data
 
 
@@ -30,10 +34,11 @@ def union_columns(data: list,
 
 def write_csv_file(filename: str, data: list) -> None:
     with open(filename, mode='w') as file:
-        columns = list(data[0].keys())
-        csv_writer = csv.DictWriter(file, fieldnames=columns)
-        csv_writer.writeheader()
-        csv_writer.writerows(data)
+        if data:
+            columns = list(data[0].keys())
+            csv_writer = csv.DictWriter(file, fieldnames=columns)
+            csv_writer.writeheader()
+            csv_writer.writerows(data)
 
 
 def calc_avg_values(data: list) -> None:
