@@ -4,23 +4,25 @@ from main import main
 
 
 default_report = 'average-rating'
-none_args = Namespace(files=None, report=default_report)
+default_columns = ['brand', 'rating']
+none_args = Namespace(files=None, report=default_report,
+                      columns=default_columns)
 incorrect_args_1 = Namespace(
-    files=['file_does_not_exist'], report=default_report)
+    files=['file_does_not_exist'], report=default_report,
+    columns=default_columns)
 incorrect_args_2 = Namespace(
     files=['file_does_not_exist', 'csv_data/products1.csv'],
-    report=default_report)
+    report=default_report, columns=default_columns)
 miss_args = Namespace(
     files=['csv_data/products1.csv'],
-    report=default_report,
-    miss_arg1='miss',
-    miss_arg2=[1, 2])
+    report=default_report, columns=default_columns,
+    miss_arg1='miss', miss_arg2=[1, 2])
 correct_args_1 = Namespace(
     files=['csv_data/products1.csv'],
-    report=default_report)
+    report=default_report, columns=default_columns)
 correct_args_2 = Namespace(
     files=['csv_data/products1.csv', 'csv_data/products2.csv'],
-    report=default_report)
+    report=default_report, columns=default_columns)
 
 
 def test_none_args():
