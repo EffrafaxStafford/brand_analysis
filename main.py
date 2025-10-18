@@ -1,6 +1,6 @@
 import argparse
 
-from analysis import read_csv_file, union_columns, write_csv_file, calc_avg_values, sorted_data
+from analysis import read_csv_file, union_columns, write_csv_file, calc_avg_values, sorted_data, print_result
 
 
 parser = argparse.ArgumentParser(description="Анализ рейтинга брендов")
@@ -11,7 +11,9 @@ args, unknown = parser.parse_known_args()
 
 if __name__ == '__main__':
     data = read_csv_file(args.files)
-    union = union_columns(data)
+    columns = ('brand', 'rating')
+    union = union_columns(data, *columns)
     calc_avg_values(union)
     sorted_data(union)
     write_csv_file(args.report, union)
+    print_result(union)

@@ -1,4 +1,5 @@
 import csv
+from tabulate import tabulate
 from statistics import mean
 
 
@@ -26,8 +27,8 @@ def union_columns(data: list, col1: str = 'brand', col2: str = 'rating') -> list
 
 def write_csv_file(filename: str, data: list) -> None:
     with open(filename, mode='w') as file:
-        fieldnames = list(data[0].keys())
-        csv_writer = csv.DictWriter(file, fieldnames=fieldnames)
+        columns = list(data[0].keys())
+        csv_writer = csv.DictWriter(file, fieldnames=columns)
         csv_writer.writeheader()
         csv_writer.writerows(data)
 
@@ -41,3 +42,10 @@ def calc_avg_values(data: list) -> None:
 
 def sorted_data(data: list) -> None:
     data.sort(key=lambda x: list(x.values())[1], reverse=True)
+
+
+def print_result(data: list) -> None:
+    print(tabulate(data,
+                   headers='keys',
+                   tablefmt='grid',
+                   showindex=range(1, len(data) + 1)))
