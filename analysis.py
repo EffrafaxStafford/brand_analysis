@@ -13,10 +13,13 @@ def read_csv_file(filenames: list) -> list:
     return data
 
 
-def union_columns(data: list, col1: str = 'brand', col2: str = 'rating') -> list:
+def union_columns(data: list,
+                  col1: str = 'brand',
+                  col2: str = 'rating') -> list:
     union, column1 = list(), list()
     for row in data:
-        sub_row = {k:v if k==col1 else [v] for k,v in row.items() if k in (col1, col2)}
+        sub_row = {k: v if k == col1 else [v]
+                   for k, v in row.items() if k in (col1, col2)}
         if sub_row[col1] not in column1:
             column1.append(sub_row[col1])
             union.append(sub_row)
