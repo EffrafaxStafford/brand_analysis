@@ -1,15 +1,14 @@
 import csv
-from enum import Enum
+from statistics import mean
 
 
 def read_csv_file(filenames: list) -> list:
     data = list()
-    for filename in filenames:
+    for filename in set(filenames):
         with open(filename, "r") as file:
             filedata = csv.DictReader(file)
             for row in filedata:
-               if row not in data:
-                  data.append(row)
+                data.append(row)
     return data
 
 
@@ -31,11 +30,3 @@ def write_csv_file(filename: str, data: list) -> None:
         csv_writer = csv.DictWriter(file, fieldnames=fieldnames)
         csv_writer.writeheader()
         csv_writer.writerows(data)
-
-
-# def get_avg_brand_ratings(brand_ratings: dict) -> dict:
-#     avg_brand_ratings = dict()
-#     for brand, ratings in brand_ratings.items():
-#         avg_brand_ratings[brand] = round(sum(ratings) / len(ratings), 2)
-#     return avg_brand_ratings
-
