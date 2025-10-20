@@ -142,7 +142,7 @@ iphone se / iphone 13 mini / iphone 15 pro / iphone 14,apple
 
 Для запуска тестов запустите `pytest`. Для просмотра покрытия добавьте параметр `--cov=.`:
 
-    ```bash
+```bash
     pytest --cov=.
-    ```
+```
     
