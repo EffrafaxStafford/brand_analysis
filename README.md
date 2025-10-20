@@ -29,7 +29,7 @@
 python main.py \
     --files file1.csv file2.csv \
     --report brand-analysis \
-    --columns brand score
+    --columns brand price
 ```
 
 ### Параметры командной строки
